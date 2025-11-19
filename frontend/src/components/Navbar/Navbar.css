@@ -330,6 +330,9 @@
 .nav-theme-toggle {
     display: flex;
     align-items: center;
+    padding-left: 1rem;
+    margin-left: 0.75rem;
+    border-left: 2px solid var(--border-color);
 }
 
 :root.dark .nav-theme-toggle {

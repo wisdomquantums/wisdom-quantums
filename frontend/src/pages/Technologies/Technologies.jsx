@@ -30,9 +30,9 @@ export default function Technologies() {
   const { data: technologies, loading, error } = useAPI("technologies");
 
   // Debug logging
-  console.log("🔍 Technologies Data:", technologies);
-  console.log("⏳ Loading:", loading);
-  console.log("❌ Error:", error);
+  console.log("Technologies Data:", technologies);
+  console.log("Loading:", loading);
+  console.log("Error:", error);
 
   // Group by category
   const groupedTech = technologies.reduce((acc, tech) => {
@@ -59,10 +59,10 @@ export default function Technologies() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-xl opacity-50 animate-pulse"></div>
-          <div className="relative animate-spin rounded-full h-16 w-16 border-4 border-gray-200 border-t-primary"></div>
+          <div className="absolute inset-0 rounded-full opacity-50 bg-gradient-to-r from-primary to-secondary blur-xl animate-pulse"></div>
+          <div className="relative w-16 h-16 border-4 border-gray-200 rounded-full animate-spin border-t-primary"></div>
         </div>
       </div>
     );
@@ -100,7 +100,7 @@ export default function Technologies() {
           transition={{ duration: 0.6 }}
         >
           <motion.div
-            className="absolute -top-6 left-1/2 transform -translate-x-1/2"
+            className="absolute transform -translate-x-1/2 -top-6 left-1/2"
             animate={{ y: [0, -10, 0], rotate: [0, 180, 360] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
@@ -145,12 +145,12 @@ export default function Technologies() {
         {/* Technology Sections */}
         {Object.keys(groupedTech).length === 0 ? (
           <motion.div
-            className="text-center py-20"
+            className="py-20 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            <Code2 className="w-20 h-20 mx-auto text-gray-300 mb-4" />
-            <p className="text-gray-600 dark:text-gray-400 text-lg">
+            <Code2 className="w-20 h-20 mx-auto mb-4 text-gray-300" />
+            <p className="text-lg text-gray-600 dark:text-gray-400">
               No technologies available at the moment.
             </p>
           </motion.div>

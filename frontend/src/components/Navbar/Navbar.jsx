@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { publicNav } from "../../_nav";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Shield } from "lucide-react";
 import "./Navbar.css";
 import logo from "../../assets/images/logo1.png";
 
@@ -71,8 +71,20 @@ export default function Navbar() {
               {link.name}
             </NavLink>
           ))}
-          <div className="nav-theme-toggle">
-            <ThemeToggle />
+          <div className="nav-actions">
+            <a
+              href="http://localhost:5174/admin/login"
+              className="nav-admin-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Admin Panel Login"
+              title="Admin Panel Login"
+            >
+              <Shield size={18} />
+            </a>
+            <div className="nav-theme-toggle">
+              <ThemeToggle />
+            </div>
           </div>
         </nav>
 
@@ -113,6 +125,19 @@ export default function Navbar() {
               <span className="mobile-item-arrow">→</span>
             </NavLink>
           ))}
+          <a
+            href="http://localhost:5174/admin/login"
+            className="mobile-item admin-item"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
+            style={{ animationDelay: `${publicNav.length * 0.05}s` }}
+          >
+            <span className="mobile-item-text">
+              <Shield size={18} />
+            </span>
+            <span className="mobile-item-arrow">↗</span>
+          </a>
           <div className="mobile-theme-toggle">
             <span className="mobile-theme-label">Theme</span>
             <ThemeToggle />

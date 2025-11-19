@@ -257,12 +257,79 @@
     color: #60a5fa;
 }
 
-.nav-theme-toggle {
+/* ============================================================
+   NAV ACTIONS (Admin + Theme Toggle)
+============================================================ */
+.nav-actions {
     display: flex;
     align-items: center;
+    gap: 1rem;
     padding-left: 1rem;
     margin-left: 0.75rem;
     border-left: 2px solid var(--border-color);
+}
+
+:root.dark .nav-actions {
+    border-left-color: rgba(255, 255, 255, 0.15);
+}
+
+.nav-admin-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-admin-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav-admin-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.4);
+}
+
+.nav-admin-btn:hover::before {
+    opacity: 1;
+}
+
+.nav-admin-btn svg,
+.nav-admin-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+:root.dark .nav-admin-btn {
+    background: linear-gradient(135deg, #60a5fa, #818cf8);
+}
+
+:root.dark .nav-admin-btn::before {
+    background: linear-gradient(135deg, #818cf8, #60a5fa);
+}
+
+:root.dark .nav-admin-btn:hover {
+    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.4);
+}
+
+.nav-theme-toggle {
+    display: flex;
+    align-items: center;
 }
 
 :root.dark .nav-theme-toggle {
@@ -483,6 +550,28 @@
     font-weight: 700;
 }
 
+.mobile-item.admin-item {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    margin-top: 0.5rem;
+    border-radius: 12px;
+}
+
+.mobile-item.admin-item .mobile-item-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mobile-item.admin-item:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    transform: translateX(4px);
+}
+
+.mobile-item.admin-item::before {
+    background: rgba(255, 255, 255, 0.3);
+}
+
 :root.dark .mobile-item:hover {
     background: rgba(96, 165, 250, 0.1);
 }
@@ -490,6 +579,14 @@
 :root.dark .mobile-item.active {
     background: rgba(96, 165, 250, 0.15);
     color: #60a5fa;
+}
+
+:root.dark .mobile-item.admin-item {
+    background: linear-gradient(135deg, #60a5fa, #818cf8);
+}
+
+:root.dark .mobile-item.admin-item:hover {
+    background: linear-gradient(135deg, #818cf8, #60a5fa);
 }
 
 .mobile-theme-toggle {

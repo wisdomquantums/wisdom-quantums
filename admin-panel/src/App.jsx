@@ -43,7 +43,7 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/admin/login" replace />;
   }
 
   return children;
@@ -76,7 +76,7 @@ function App() {
       />
 
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/admin/login" element={<Login />} />
 
         <Route
           path="/*"
@@ -84,31 +84,50 @@ function App() {
             <ProtectedRoute>
               <AdminLayout>
                 <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/services" element={<Services />} />
-                  <Route path="/projects" element={<Projects />} />
-                  <Route path="/blogs" element={<Blogs />} />
-                  <Route path="/testimonials" element={<Testimonials />} />
-                  <Route path="/careers" element={<Careers />} />
-                  <Route path="/inquiries" element={<Inquiries />} />
-                  <Route path="/technologies" element={<Technologies />} />
-                  <Route path="/team" element={<Team />} />
-                  <Route path="/gallery" element={<Gallery />} />
-                  <Route path="/users" element={<Users />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/hero-sections" element={<HeroSection />} />
                   <Route
-                    path="/business-solutions"
+                    path="/"
+                    element={<Navigate to="/admin/dashboard" replace />}
+                  />
+                  <Route path="/admin/dashboard" element={<Dashboard />} />
+                  <Route path="/admin/services" element={<Services />} />
+                  <Route path="/admin/projects" element={<Projects />} />
+                  <Route path="/admin/blogs" element={<Blogs />} />
+                  <Route
+                    path="/admin/testimonials"
+                    element={<Testimonials />}
+                  />
+                  <Route path="/admin/careers" element={<Careers />} />
+                  <Route path="/admin/inquiries" element={<Inquiries />} />
+                  <Route
+                    path="/admin/technologies"
+                    element={<Technologies />}
+                  />
+                  <Route path="/admin/team" element={<Team />} />
+                  <Route path="/admin/gallery" element={<Gallery />} />
+                  <Route path="/admin/users" element={<Users />} />
+                  <Route path="/admin/profile" element={<Profile />} />
+                  <Route
+                    path="/admin/hero-sections"
+                    element={<HeroSection />}
+                  />
+                  <Route
+                    path="/admin/business-solutions"
                     element={<BusinessSolutions />}
                   />
-                  <Route path="/how-we-work" element={<HowWeWork />} />
-                  <Route path="/about-page" element={<AboutPage />} />
-                  <Route path="/founders" element={<Founders />} />
-                  <Route path="/why-choose-us" element={<WhyChooseUs />} />
-                  <Route path="/vision-mission" element={<VisionMission />} />
-                  <Route path="/it-solutions" element={<ITSolutions />} />
+                  <Route path="/admin/how-we-work" element={<HowWeWork />} />
+                  <Route path="/admin/about-page" element={<AboutPage />} />
+                  <Route path="/admin/founders" element={<Founders />} />
                   <Route
-                    path="/business-development"
+                    path="/admin/why-choose-us"
+                    element={<WhyChooseUs />}
+                  />
+                  <Route
+                    path="/admin/vision-mission"
+                    element={<VisionMission />}
+                  />
+                  <Route path="/admin/it-solutions" element={<ITSolutions />} />
+                  <Route
+                    path="/admin/business-development"
                     element={<BusinessDevelopment />}
                   />
                 </Routes>

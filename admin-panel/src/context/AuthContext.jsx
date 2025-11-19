@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("adminToken", token);
       setUser(user);
       toast.success("Login successful!");
-      navigate("/");
+      navigate("/admin/dashboard");
 
       return { success: true };
     } catch (error) {
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("adminToken");
     setUser(null);
-    navigate("/login");
+    navigate("/admin/login");
     toast.success("Logged out successfully");
   };
 

@@ -3,13 +3,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Create Sequelize instance for MySQL
+// MySQL Connection Using Sequelize
 const sequelize = new Sequelize(
-    process.env.DB_NAME || 'wisdomquantums',
-    process.env.DB_USER || 'root',
-    process.env.DB_PASSWORD || '',
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
     {
-        host: process.env.DB_HOST || 'localhost',
+        host: process.env.DB_HOST,
         port: process.env.DB_PORT || 3306,
         dialect: 'mysql',
         logging: process.env.NODE_ENV === 'development' ? console.log : false,
@@ -27,20 +27,19 @@ const sequelize = new Sequelize(
     }
 );
 
-// Test connection
+// Connect to MySQL
 export const connectDB = async () => {
     try {
         await sequelize.authenticate();
         console.log('✅ MySQL Database connected successfully');
 
-        // Sync models in development - use force: false to avoid alter issues
         if (process.env.NODE_ENV === 'development') {
-            // Only create tables if they don't exist, don't alter existing ones
             await sequelize.sync({ force: false, alter: false });
             console.log('✅ Database models synchronized');
         }
     } catch (error) {
-        console.error('❌ Unable to connect to MySQL database:', error.message);
+        console.error('❌ Unable to connect to MySQL Database');
+        console.error('Error:', error.message);
         process.exit(1);
     }
 };

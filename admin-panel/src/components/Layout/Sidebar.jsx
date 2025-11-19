@@ -31,44 +31,54 @@ import logo from "../../assets/images/logo1.png";
 const menuSections = [
   {
     title: "OVERVIEW",
-    items: [{ name: "Dashboard", path: "/", icon: LayoutDashboard }],
+    items: [
+      { name: "Dashboard", path: "/admin/dashboard", icon: LayoutDashboard },
+    ],
   },
   {
     title: "CONTENT",
     items: [
-      { name: "Hero Section", path: "/hero-sections", icon: Home },
-      { name: "Vision & Mission", path: "/vision-mission", icon: Target },
-      { name: "Business Dev", path: "/business-development", icon: TrendingUp },
-      { name: "Solutions", path: "/business-solutions", icon: Lightbulb },
-      { name: "Why Choose Us", path: "/why-choose-us", icon: CheckCircle },
-      { name: "How We Work", path: "/how-we-work", icon: Workflow },
-      { name: "IT Solutions", path: "/it-solutions", icon: Zap },
+      { name: "Hero Section", path: "/admin/hero-sections", icon: Home },
+      { name: "Vision & Mission", path: "/admin/vision-mission", icon: Target },
+      {
+        name: "Business Dev",
+        path: "/admin/business-development",
+        icon: TrendingUp,
+      },
+      { name: "Solutions", path: "/admin/business-solutions", icon: Lightbulb },
+      {
+        name: "Why Choose Us",
+        path: "/admin/why-choose-us",
+        icon: CheckCircle,
+      },
+      { name: "How We Work", path: "/admin/how-we-work", icon: Workflow },
+      { name: "IT Solutions", path: "/admin/it-solutions", icon: Zap },
     ],
   },
   {
     title: "COMPANY",
     items: [
-      { name: "About Page", path: "/about-page", icon: Info },
-      { name: "Founders", path: "/founders", icon: UserCheck },
-      { name: "Team", path: "/team", icon: UserCircle },
+      { name: "About Page", path: "/admin/about-page", icon: Info },
+      { name: "Founders", path: "/admin/founders", icon: UserCheck },
+      { name: "Team", path: "/admin/team", icon: UserCircle },
     ],
   },
   {
     title: "PORTFOLIO",
     items: [
-      { name: "Services", path: "/services", icon: Briefcase },
-      { name: "Projects", path: "/projects", icon: FolderOpen },
-      { name: "Technologies", path: "/technologies", icon: Code },
-      { name: "Gallery", path: "/gallery", icon: Image },
+      { name: "Services", path: "/admin/services", icon: Briefcase },
+      { name: "Projects", path: "/admin/projects", icon: FolderOpen },
+      { name: "Technologies", path: "/admin/technologies", icon: Code },
+      { name: "Gallery", path: "/admin/gallery", icon: Image },
     ],
   },
   {
     title: "ENGAGEMENT",
     items: [
-      { name: "Blogs", path: "/blogs", icon: FileText },
-      { name: "Testimonials", path: "/testimonials", icon: Star },
-      { name: "Careers", path: "/careers", icon: Users },
-      { name: "Inquiries", path: "/inquiries", icon: Mail },
+      { name: "Blogs", path: "/admin/blogs", icon: FileText },
+      { name: "Testimonials", path: "/admin/testimonials", icon: Star },
+      { name: "Careers", path: "/admin/careers", icon: Users },
+      { name: "Inquiries", path: "/admin/inquiries", icon: Mail },
     ],
   },
 ];
@@ -156,7 +166,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                     <NavLink
                       key={item.path}
                       to={item.path}
-                      end={item.path === "/"}
+                      end={item.path === "/admin/dashboard"}
                       className={({ isActive }) =>
                         `group flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 relative overflow-hidden ${
                           isActive
@@ -197,7 +207,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                 ADMIN
               </p>
               <NavLink
-                to="/users"
+                to="/admin/users"
                 className={({ isActive }) =>
                   `group flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 relative overflow-hidden ${
                     isActive

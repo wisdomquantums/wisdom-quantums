@@ -1,0 +1,28 @@
+/* Home Page Wrapper */
+.home-page {
+  width: 100%;
+  background: var(--bg-primary);
+  transition: background-color 0.3s ease;
+}
+
+.home-section {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: var(--bg-primary);
+  transition: background-color 0.3s ease;
+}
+
+/* Ensure smooth transitions for dark mode */
+.home-page * {
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Dark theme adjustments */
+:root.dark .home-page {
+  background: var(--bg-primary);
+}
+
+:root.dark .home-section {
+  background: var(--bg-primary);
+}

@@ -1,0 +1,15 @@
+# robots.txt for WisdomQuantums Solutions
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private pages
+Disallow: /admin
+Disallow: /login
+Disallow: /dashboard
+
+# Sitemap location
+Sitemap: https://www.wisdomquantums.com/sitemap.xml
+
+# Crawl-delay (optional, helps prevent server overload)
+Crawl-delay: 1

@@ -1,0 +1,26 @@
+# robots.txt for Admin Panel - WisdomQuantums Solutions
+# This is a private admin area - Block all search engines
+
+User-agent: *
+Disallow: /
+
+# Block all major search engines explicitly
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+# No sitemap for admin panel (security)

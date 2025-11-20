@@ -190,7 +190,7 @@ export default function Users() {
 
           {/* Name */}
           <div>
-            <label className="block text-sm font-semibold text-slate-300 mb-2 flex items-center gap-2">
+            <label className="flex items-center gap-2 text-sm font-semibold text-slate-300 mb-2">
               <User className="w-4 h-4 text-cyan-400" />
               Full Name
             </label>
@@ -212,7 +212,7 @@ export default function Users() {
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-semibold text-slate-300 mb-2 flex items-center gap-2">
+            <label className="flex items-center gap-2 text-sm font-semibold text-slate-300 mb-2">
               <Mail className="w-4 h-4 text-cyan-400" />
               Email Address
             </label>
@@ -234,7 +234,7 @@ export default function Users() {
 
           {/* Password */}
           <div>
-            <label className="block text-sm font-semibold text-slate-300 mb-2 flex items-center gap-2">
+            <label className="flex items-center gap-2 text-sm font-semibold text-slate-300 mb-2">
               <Lock className="w-4 h-4 text-cyan-400" />
               Password
               {editingItem && (
@@ -267,7 +267,7 @@ export default function Users() {
 
           {/* Role Selection */}
           <div>
-            <label className="block text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+            <label className="flex items-center gap-2 text-sm font-semibold text-slate-300 mb-3">
               <Shield className="w-4 h-4 text-cyan-400" />
               User Role
             </label>

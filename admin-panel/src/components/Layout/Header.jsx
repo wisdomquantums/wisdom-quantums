@@ -93,7 +93,7 @@ export default function Header({ toggleSidebar }) {
 
   return (
     <header
-      className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border-b border-cyan-500/20 sticky top-0 z-50 relative"
+      className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border-b border-cyan-500/20 sticky top-0 z-50"
       style={{
         boxShadow: "0 4px 30px rgba(6, 182, 212, 0.1)",
       }}

@@ -1,12 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Charset must be first -->
     <meta charset="UTF-8" />
+
+    <!-- Mobile viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Admin Panel - WisdomQuantums Solutions</title>
+
+    <!-- Security: Prevent search engine indexing (Admin Panel) -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <meta name="bingbot" content="noindex, nofollow" />
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#6366f1" />
+
+    <!-- Primary SEO (Internal Use Only) -->
+    <title>Admin Dashboard - WisdomQuantums Solutions</title>
+    <meta
+      name="description"
+      content="Secure admin dashboard for WisdomQuantums Solutions. Manage inquiries, content, and business operations."
+    />
+    <meta name="author" content="WisdomQuantums Solutions" />
+
+    <!-- Preload Logo (Performance) -->
+    <link rel="preload" as="image" href="/logo1.png" />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="/logo1.png" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Security Headers (Meta) -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+
+    <!-- Prevent caching of sensitive data -->
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <!-- Open Graph (For internal sharing only) -->
+    <meta property="og:title" content="Admin Dashboard - WisdomQuantums" />
+    <meta
+      property="og:description"
+      content="Secure admin panel for business management"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/logo1.png" />
+
+    <!-- Prevent external embedding -->
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+
+    <!-- WebApp Schema (Internal Tool) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "WisdomQuantums Admin Dashboard",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "INR"
+        },
+        "featureList": [
+          "Inquiry Management",
+          "Content Management",
+          "Analytics Dashboard",
+          "User Management"
+        ]
+      }
+    </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

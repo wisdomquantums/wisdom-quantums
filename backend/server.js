@@ -66,8 +66,8 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' })); // Parse URL-enc
 
 // CORS configuration - Allow both frontend and admin panel
 const allowedOrigins = [
-    'http://localhost:5173', // Frontend
-    'http://localhost:3000', // Admin Panel
+    // 'http://localhost:5173', // Frontend
+    // 'http://localhost:3000', // Admin Panel
     process.env.FRONTEND_URL,
     process.env.ADMIN_PANEL_URL
 ].filter(Boolean);

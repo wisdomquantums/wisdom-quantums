@@ -5,7 +5,16 @@ import { protect, adminOnly, superadminOnly } from '../middleware/auth.middlewar
 
 const router = express.Router();
 
-// All routes require authentication and admin privileges
+// ==============================
+// PUBLIC ROUTES
+// ==============================
+// Note: Login route is in auth.routes.js and is public (no middleware)
+// router.post('/login', adminLogin); ✔ login must be public
+
+// ==============================
+// PROTECTED ADMIN ROUTES
+// ==============================
+// All routes below require authentication and admin privileges
 router.use(protect);
 router.use(adminOnly);
 

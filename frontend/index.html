@@ -30,7 +30,7 @@
     <link rel="canonical" href="https://www.wisdomquantums.com/" />
 
     <!-- Preload Logo (Performance + SEO) -->
-    <link rel="preload" as="image" href="/logo.png" />
+    <link rel="preload" as="image" href="/logo1.png" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -39,7 +39,7 @@
     <link rel="manifest" href="/manifest.json" />
 
     <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo1.png" />
 
     <!-- Open Graph -->
     <meta
@@ -69,33 +69,129 @@
       content="https://www.wisdomquantums.com/og-image.png"
     />
 
-    <!-- Organization Schema -->
+    <!-- Enhanced Organization Schema with Logo -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "WisdomQuantums Solutions",
+        "alternateName": "WisdomQuantums",
         "url": "https://www.wisdomquantums.com",
-        "logo": "https://www.wisdomquantums.com/logo.png",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.wisdomquantums.com/logo1.png",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://www.wisdomquantums.com/logo1.png",
+        "description": "WisdomQuantums Solutions offers top-notch web development, custom software, and mobile app solutions. Trusted for excellence and innovation across digital services.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Your City",
+          "addressRegion": "Your State",
+          "addressCountry": "IN"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91-XXXXXXXXXX",
+          "contactType": "customer service",
+          "areaServed": "IN",
+          "availableLanguage": ["en", "hi"]
+        },
         "sameAs": [
-          "https://www.facebook.com/",
-          "https://www.linkedin.com/",
-          "https://www.instagram.com/"
+          "https://www.facebook.com/wisdomquantums",
+          "https://www.linkedin.com/company/wisdomquantums",
+          "https://www.instagram.com/wisdomquantums",
+          "https://twitter.com/wisdomquantums"
         ]
       }
     </script>
 
-    <!-- Website Schema (For Google Sitelinks) -->
+    <!-- Website Schema with Sitelinks Search Box -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
+        "name": "WisdomQuantums Solutions",
         "url": "https://www.wisdomquantums.com/",
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://www.wisdomquantums.com/?s={search_term_string}",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.wisdomquantums.com/?s={search_term_string}"
+          },
           "query-input": "required name=search_term_string"
         }
+      }
+    </script>
+
+    <!-- Breadcrumb Schema for Navigation -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.wisdomquantums.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About Us",
+            "item": "https://www.wisdomquantums.com/about"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Services",
+            "item": "https://www.wisdomquantums.com/services"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Contact Us",
+            "item": "https://www.wisdomquantums.com/contact"
+          }
+        ]
+      }
+    </script>
+
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "WisdomQuantums Solutions",
+        "image": "https://www.wisdomquantums.com/logo1.png",
+        "url": "https://www.wisdomquantums.com",
+        "telephone": "+91-XXXXXXXXXX",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Your Street Address",
+          "addressLocality": "Your City",
+          "addressRegion": "Your State",
+          "postalCode": "XXXXXX",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 0.0,
+          "longitude": 0.0
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        "sameAs": [
+          "https://www.facebook.com/wisdomquantums",
+          "https://www.linkedin.com/company/wisdomquantums"
+        ]
       }
     </script>
 

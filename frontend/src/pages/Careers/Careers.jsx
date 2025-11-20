@@ -37,9 +37,7 @@ const Careers = () => {
 
   const fetchCareers = async () => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/careers`
-      );
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/careers`);
       const data = await response.json();
       if (data.success) {
         // Filter only active careers
@@ -85,12 +83,12 @@ const Careers = () => {
     try {
       console.log(
         "Submitting career inquiry to:",
-        `${import.meta.env.VITE_BACKEND_URL}/api/inquiries`
+        `${import.meta.env.VITE_API_URL}/inquiries`
       );
       console.log("Data:", data);
 
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/inquiries`,
+        `${import.meta.env.VITE_API_URL}/inquiries`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

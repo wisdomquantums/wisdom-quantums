@@ -36,12 +36,12 @@ export default function ContactUs() {
     try {
       console.log(
         "Submitting contact inquiry to:",
-        `${import.meta.env.VITE_BACKEND_URL}/api/inquiries`
+        `${import.meta.env.VITE_API_URL}/inquiries`
       );
       console.log("Data:", data);
 
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/inquiries`,
+        `${import.meta.env.VITE_API_URL}/inquiries`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

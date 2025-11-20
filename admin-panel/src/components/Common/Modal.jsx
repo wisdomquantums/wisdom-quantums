@@ -26,7 +26,7 @@ export default function Modal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
           />
 
           {/* Modal */}
@@ -35,25 +35,55 @@ export default function Modal({
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className={`bg-white rounded-xl shadow-2xl w-full ${sizes[size]} max-h-[90vh] overflow-hidden`}
+              className={`relative bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-2xl w-full ${sizes[size]} max-h-[90vh] overflow-hidden border border-cyan-500/30`}
+              style={{
+                boxShadow:
+                  "0 20px 60px rgba(6, 182, 212, 0.3), 0 0 40px rgba(6, 182, 212, 0.1)",
+              }}
             >
+              {/* Animated top border */}
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
+
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+              <div className="relative flex items-center justify-between p-6 border-b border-cyan-500/20 bg-slate-900/50 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-purple-500/5"></div>
+                <h2 className="relative text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400">
+                  {title}
+                </h2>
                 <button
                   onClick={onClose}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition"
+                  className="relative p-2.5 rounded-lg transition-all duration-300 group overflow-hidden"
                 >
-                  <X className="w-6 h-6 text-gray-600" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <X className="w-6 h-6 text-slate-400 group-hover:text-red-400 transition-colors relative z-10" />
                 </button>
               </div>
 
               {/* Content */}
-              <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+              <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)] custom-scrollbar">
                 {children}
               </div>
+
+              {/* Animated bottom border */}
+              <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
             </motion.div>
           </div>
+
+          <style jsx>{`
+            .custom-scrollbar::-webkit-scrollbar {
+              width: 6px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-track {
+              background: rgba(15, 23, 42, 0.3);
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+              background: linear-gradient(to bottom, #06b6d4, #a855f7);
+              border-radius: 3px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+              background: linear-gradient(to bottom, #22d3ee, #c084fc);
+            }
+          `}</style>
         </>
       )}
     </AnimatePresence>

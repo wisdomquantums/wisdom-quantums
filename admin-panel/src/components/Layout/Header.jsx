@@ -234,7 +234,7 @@ export default function Header({ toggleSidebar }) {
                   <div className="py-2">
                     <button
                       onClick={() => {
-                        navigate("/profile");
+                        navigate("/admin/profile");
                         setShowDropdown(false);
                       }}
                       className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-300 hover:text-cyan-400 hover:bg-cyan-500/10 transition-all group"
@@ -245,7 +245,7 @@ export default function Header({ toggleSidebar }) {
 
                     <button
                       onClick={() => {
-                        navigate("/profile");
+                        navigate("/admin/profile");
                         setShowDropdown(false);
                       }}
                       className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-300 hover:text-cyan-400 hover:bg-cyan-500/10 transition-all group"
@@ -408,7 +408,7 @@ export default function Header({ toggleSidebar }) {
             <div className="p-4 space-y-4">
               <button
                 onClick={() => {
-                  navigate("/profile");
+                  navigate("/admin/profile");
                   setShowSettings(false);
                 }}
                 className="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-slate-800/50 hover:bg-cyan-500/10 transition-colors"
@@ -418,7 +418,7 @@ export default function Header({ toggleSidebar }) {
               </button>
               <button
                 onClick={() => {
-                  navigate("/users");
+                  navigate("/admin/users");
                   setShowSettings(false);
                 }}
                 className="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-slate-800/50 hover:bg-cyan-500/10 transition-colors"

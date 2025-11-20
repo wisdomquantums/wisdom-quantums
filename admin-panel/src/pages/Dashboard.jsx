@@ -51,7 +51,7 @@ export default function Dashboard() {
           gradient: "from-blue-500 to-blue-600",
           change: stats.serviceTrend,
           trend: "up",
-          link: "/services",
+          link: "/admin/services",
         },
         {
           title: "Total Projects",
@@ -60,7 +60,7 @@ export default function Dashboard() {
           gradient: "from-green-500 to-emerald-600",
           change: stats.projectTrend,
           trend: "up",
-          link: "/projects",
+          link: "/admin/projects",
           subtitle: `${stats.recentProjects} this week`,
         },
         {
@@ -70,7 +70,7 @@ export default function Dashboard() {
           gradient: "from-purple-500 to-purple-600",
           change: stats.blogTrend,
           trend: "up",
-          link: "/blogs",
+          link: "/admin/blogs",
           subtitle: `${stats.recentBlogs} this week`,
         },
         {
@@ -80,7 +80,7 @@ export default function Dashboard() {
           gradient: "from-red-500 to-rose-600",
           change: stats.inquiryTrend,
           trend: "up",
-          link: "/inquiries",
+          link: "/admin/inquiries",
           subtitle: `${stats.inquiriesLastWeek} this week`,
         },
         {
@@ -90,7 +90,7 @@ export default function Dashboard() {
           gradient: "from-yellow-500 to-orange-600",
           change: `${stats.careers} total`,
           trend: "neutral",
-          link: "/careers",
+          link: "/admin/careers",
         },
         {
           title: "Testimonials",
@@ -99,7 +99,7 @@ export default function Dashboard() {
           gradient: "from-pink-500 to-rose-600",
           change: stats.testimonialTrend,
           trend: "up",
-          link: "/testimonials",
+          link: "/admin/testimonials",
         },
       ]
     : [];
@@ -234,28 +234,28 @@ export default function Dashboard() {
               icon={Briefcase}
               title="Add New Service"
               description="Create a new service offering"
-              href="/services"
+              href="/admin/services"
               color="blue"
             />
             <QuickActionButton
               icon={FolderOpen}
               title="Add New Project"
               description="Showcase your latest work"
-              href="/projects"
+              href="/admin/projects"
               color="green"
             />
             <QuickActionButton
               icon={FileText}
               title="Write Blog Post"
               description="Share your insights"
-              href="/blogs"
+              href="/admin/blogs"
               color="purple"
             />
             <QuickActionButton
               icon={Mail}
               title="View Inquiries"
               description={`${stats?.newInquiries || 0} new messages`}
-              href="/inquiries"
+              href="/admin/inquiries"
               color="red"
             />
           </div>
@@ -279,7 +279,7 @@ export default function Dashboard() {
               stats.recentInquiries.map((inquiry) => (
                 <Link
                   key={inquiry.id}
-                  to="/inquiries"
+                  to="/admin/inquiries"
                   className="block p-3 rounded-xl bg-slate-900/30 hover:bg-slate-900/50 border border-cyan-500/10 hover:border-cyan-400/30 transition-all"
                 >
                   <div className="flex items-start justify-between">

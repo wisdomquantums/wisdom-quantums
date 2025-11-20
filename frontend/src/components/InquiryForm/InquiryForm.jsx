@@ -43,12 +43,12 @@ export default function InquiryForm() {
     try {
       console.log(
         "Submitting inquiry to:",
-        `${import.meta.env.VITE_BACKEND_URL}/api/inquiries`
+        `${import.meta.env.VITE_BACKEND_URL}/api/inquiry`
       );
       console.log("Data:", data);
 
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/inquiries`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/inquiry`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

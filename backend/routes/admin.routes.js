@@ -9,7 +9,7 @@ const router = express.Router();
 // PUBLIC ROUTES
 // ==============================
 // Note: Login route is in auth.routes.js and is public (no middleware)
-// router.post('/login', adminLogin); ✔ login must be public
+router.post('/login', adminLogin);
 
 // ==============================
 // PROTECTED ADMIN ROUTES

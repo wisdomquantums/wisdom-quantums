@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("adminToken");
     setUser(null);
-    navigate("/admin/login");
+    navigate("/login");
     toast.success("Logged out successfully");
   };
 

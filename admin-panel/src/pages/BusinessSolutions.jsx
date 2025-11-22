@@ -66,18 +66,47 @@ export default function BusinessSolutions() {
 
   const handleEdit = (item) => {
     setEditingItem(item);
+
+    // Parse arrays if they are strings
+    const parseArray = (data) => {
+      try {
+        if (typeof data === "string") {
+          return JSON.parse(data);
+        }
+        return Array.isArray(data) ? data : [];
+      } catch (error) {
+        console.error("Error parsing array:", error);
+        return [];
+      }
+    };
+
+    // Parse stats if it's a string
+    const parseStats = (statsData) => {
+      try {
+        if (typeof statsData === "string") {
+          return JSON.parse(statsData);
+        }
+        return (
+          statsData || {
+            projects: "500+",
+            technologies: "10+",
+            companies: "400+",
+          }
+        );
+      } catch (error) {
+        console.error("Error parsing stats:", error);
+        return { projects: "500+", technologies: "10+", companies: "400+" };
+      }
+    };
+
     setFormData({
       subtitle: item.subtitle,
       title: item.title,
       mainImage: item.mainImage,
       smallImage: item.smallImage,
-      features: item.features || [],
-      benefits: item.benefits || [],
-      stats: item.stats || {
-        projects: "500+",
-        technologies: "10+",
-        companies: "400+",
-      },
+      features: parseArray(item.features),
+      benefits: parseArray(item.benefits),
+      stats: parseStats(item.stats),
       isActive: item.isActive,
     });
     setIsModalOpen(true);

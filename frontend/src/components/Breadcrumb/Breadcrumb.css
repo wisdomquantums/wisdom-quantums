@@ -9,18 +9,28 @@
   z-index: 5;
   transition: all 0.3s ease;
   background: transparent;
+  display: block;
 }
 
-@media (max-width: 768px) {
+/* Hide on Mobile (below 768px) */
+@media (max-width: 767px) {
   .breadcrumb-container {
-    padding: 0.875rem 1.25rem;
-    top: 65px;
+    display: none !important;
   }
 }
 
-@media (max-width: 480px) {
+/* Tablet adjustments (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
   .breadcrumb-container {
-    top: 60px;
+    padding: 0.875rem 1.5rem;
+    top: 68px;
+  }
+}
+
+/* Desktop (above 1024px) */
+@media (min-width: 1025px) {
+  .breadcrumb-container {
+    display: block;
   }
 }
 
@@ -34,7 +44,6 @@
   --breadcrumb-hover-bg: rgba(249, 250, 251, 0.9);
   --breadcrumb-active-bg: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   --breadcrumb-active-text: #ffffff;
-  --breadcrumb-shadow: rgba(99, 102, 241, 0.3);
 }
 
 /* Dark Mode */
@@ -45,7 +54,6 @@
   --breadcrumb-text-muted: #9ca3af;
   --breadcrumb-border: rgba(55, 65, 81, 0.8);
   --breadcrumb-hover-bg: rgba(55, 65, 81, 0.9);
-  --breadcrumb-active-bg: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
   --breadcrumb-active-text: #ffffff;
   --breadcrumb-shadow: rgba(129, 140, 248, 0.4);
 }
@@ -59,7 +67,6 @@
   margin: 0 auto;
   padding: 0.75rem 1.5rem;
   border-radius: 12px;
-  backdrop-filter: blur(10px);
 }
 
 @media (max-width: 768px) {
@@ -178,13 +185,33 @@
   background: #f9fafb;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .breadcrumb-item span {
-    display: none;
+/* Responsive Adjustments */
+
+/* Tablet - Show compact version */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .breadcrumb-wrapper {
+    padding: 0.625rem 1rem;
   }
   
-  .breadcrumb-home .breadcrumb-icon {
-    margin: 0;
+  .breadcrumb-item {
+    font-size: 0.8125rem;
+    padding: 0.4rem 0.625rem;
+  }
+  
+  .breadcrumb-icon,
+  .breadcrumb-separator {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+/* Desktop - Full version */
+@media (min-width: 1025px) {
+  .breadcrumb-wrapper {
+    padding: 0.75rem 1.5rem;
+  }
+  
+  .breadcrumb-item {
+    font-size: 0.875rem;
   }
 }

@@ -48,7 +48,7 @@ export default function FooterSection({
           {/* SOCIAL ICONS ROW */}
           <div className="footer-social-row">
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/wisdomquantums/"
               target="_blank"
               rel="noreferrer"
               className="social-icon"
@@ -56,7 +56,7 @@ export default function FooterSection({
               <FontAwesomeIcon icon={faLinkedin} />
             </a>
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/share/16XcNf3uT5/"
               target="_blank"
               rel="noreferrer"
               className="social-icon"
@@ -64,7 +64,7 @@ export default function FooterSection({
               <FontAwesomeIcon icon={faFacebook} />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/wisdomquantums?igsh=MWs3NDd6dTgxemd0NQ=="
               target="_blank"
               rel="noreferrer"
               className="social-icon"
@@ -72,7 +72,7 @@ export default function FooterSection({
               <FontAwesomeIcon icon={faInstagram} />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://x.com/wisdomquantums?t=Z-WuwoclTdQiU24f6BynAg&s=09"
               target="_blank"
               rel="noreferrer"
               className="social-icon"
@@ -80,7 +80,7 @@ export default function FooterSection({
               <FontAwesomeIcon icon={faXTwitter} />
             </a>
             <a
-              href="https://youtube.com"
+              href="https://www.youtube.com/channel/UCzBoJCPGZ8wMPTOedpZcBXg"
               target="_blank"
               rel="noreferrer"
               className="social-icon"

@@ -1,50 +1,11 @@
 import { motion } from "framer-motion";
-import {
-  Lightbulb,
-  CheckCircle2,
-  TrendingUp,
-  Headphones,
-  ArrowRight,
-} from "lucide-react";
 import { useAPI } from "../../hooks/useAPI";
 import "./HowWeWork.css";
-import centerLogo from "@/assets/images/logo1.png";
-
-const stepIcons = [Lightbulb, CheckCircle2, TrendingUp, Headphones];
 
 export default function HowWeWork() {
   const { data: howWeWorkData, loading } = useAPI("how-we-work");
 
-  // Default steps
-  const defaultSteps = [
-    {
-      title: "Understanding Your Vision",
-      text: "We begin by listening. Our team collaborates closely with you to understand your business goals, challenges, and vision. This helps us tailor solutions that truly meet your needs.",
-    },
-    {
-      title: "Quality Assurance",
-      text: "Our process is iterative and transparent. By following agile methodologies, we adapt quickly to feedback, ensuring timely delivery while minimizing risks.",
-    },
-    {
-      title: "Strategic Planning",
-      text: "Our experts analyze your requirements and develop a detailed plan. Through innovation and efficiency, we craft strategies that align technology with your business objectives.",
-    },
-    {
-      title: "Support & Optimization",
-      text: "Our partnership doesn't end at delivery. We provide continuous support, monitor performance, and optimize solutions to keep your business ahead of the curve.",
-    },
-  ];
-
-  // Use first active item or fallback to default
-  const content = howWeWorkData.find((item) => item.isActive) || {
-    title: "How we work",
-    subtitle: "Simple Easy Steps to Follow",
-    centerLogo: centerLogo,
-    steps: defaultSteps,
-  };
-
-  // Ensure steps is an array
-  const steps = Array.isArray(content.steps) ? content.steps : defaultSteps;
+  const content = howWeWorkData.find((item) => item.isActive);
 
   if (loading) {
     return (
@@ -54,6 +15,29 @@ export default function HowWeWork() {
         </div>
       </section>
     );
+  }
+
+  // Don't render if no data
+  if (!content) {
+    return null;
+  }
+
+  // Parse steps
+  const parseSteps = (stepsData) => {
+    try {
+      const parsed =
+        typeof stepsData === "string" ? JSON.parse(stepsData) : stepsData;
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.error("Error parsing steps:", error);
+      return [];
+    }
+  };
+
+  const steps = parseSteps(content.steps);
+
+  if (steps.length === 0) {
+    return null;
   }
 
   return (

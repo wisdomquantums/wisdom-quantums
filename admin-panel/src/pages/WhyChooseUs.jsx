@@ -63,10 +63,24 @@ export default function WhyChooseUs() {
 
   const handleEdit = (item) => {
     setEditingItem(item);
+
+    // Parse items if it's a string
+    const parseItems = (itemsData) => {
+      try {
+        if (typeof itemsData === "string") {
+          return JSON.parse(itemsData);
+        }
+        return Array.isArray(itemsData) ? itemsData : [];
+      } catch (error) {
+        console.error("Error parsing items:", error);
+        return [];
+      }
+    };
+
     setFormData({
       subtitle: item.subtitle,
       title: item.title,
-      items: item.items || [],
+      items: parseItems(item.items),
       isActive: item.isActive,
     });
     setIsModalOpen(true);

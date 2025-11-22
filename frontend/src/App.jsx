@@ -1,6 +1,7 @@
 import React from "react";
 import Router from "./router";
 import WAFloat from "./components/WAFloat/WAFloat";
+import InquiryForm from "./components/InquiryForm/InquiryForm";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "./context/ThemeContext";
 
@@ -43,6 +44,9 @@ export default function App() {
 
         {/* GLOBAL WHATSAPP BUTTON */}
         <WAFloat />
+
+        {/* GLOBAL INQUIRY FORM - Sticky button + Popup on all pages */}
+        <InquiryForm />
 
         {/* MAIN APP ROUTES */}
         <Router />

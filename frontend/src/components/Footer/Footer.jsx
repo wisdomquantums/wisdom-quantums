@@ -1,4 +1,3 @@
-import React from "react";
 import { publicNav } from "../../_nav";
 import FooterSection from "./FooterSection";
 import "./Footer.css";
@@ -28,7 +27,12 @@ export default function Footer() {
         />
 
         {/* Inline Quick Links */}
-        <FooterSection title="Quick Links" type="links" links={publicNav} />
+        <FooterSection
+          className="quick-link"
+          title="Quick Links"
+          type="links"
+          links={publicNav}
+        />
 
         {/* Contact Block */}
         <FooterSection

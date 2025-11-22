@@ -7,20 +7,7 @@ import { motion } from "framer-motion";
 export default function VisionMission() {
   const { data: visionMissionData, loading } = useAPI("vision-mission");
 
-  // Use first active item or fallback to default
-  const content = visionMissionData.find((item) => item.isActive) || {
-    title: "Grow Your Business with WisdomQuantums",
-    subtitle:
-      "Accelerate your digital journey with intelligent solutions, advanced technology, and strategic expertise designed for future-ready businesses.",
-    description:
-      "At WisdomQuantums, we empower organizations with innovative, custom-built IT solutions that drive efficiency, scalability, and long-term success. Our team partners closely with clients to streamline processes, enhance digital capabilities, and unlock new opportunities in a rapidly evolving digital world.",
-    vision:
-      "To become a global benchmark in transforming businesses through intelligent, innovative, and future-driven digital solutions.",
-    mission:
-      "To empower organizations with next-gen technology, tailored strategies, and scalable solutions that accelerate growth and maximize impact.",
-    ctaText: "Contact Us",
-    ctaLink: "/contact-us",
-  };
+  const content = visionMissionData.find((item) => item.isActive);
 
   if (loading) {
     return (
@@ -30,6 +17,11 @@ export default function VisionMission() {
         </div>
       </section>
     );
+  }
+
+  // Don't render if no data
+  if (!content) {
+    return null;
   }
 
   return (

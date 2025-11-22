@@ -14,49 +14,13 @@ import { useAPI } from "../../hooks/useAPI";
 import "./BusinessSolutions.css";
 import { motion } from "framer-motion";
 
-import mainImg from "@/assets/images/solutions/main.jpg";
-import smallImg from "@/assets/images/solutions/small.jpg";
-
 const featureIcons = [Target, Zap, TrendingUp, Users, Shield];
 const benefitIcons = [CheckCircle2, Award, BarChart3, Rocket, Users];
 
 export default function BusinessSolutions() {
   const { data: solutions, loading } = useAPI("business-solutions");
 
-  // Default data
-  const defaultFeatures = [
-    "Technology Integration",
-    "Problem-Solving Approach",
-    "Scalable Growth",
-    "Adaptability and Agility",
-    "Customer-Centric Design",
-  ];
-
-  const defaultBenefits = [
-    "Increased Efficiency",
-    "Enhanced Competitiveness",
-    "Better Decision-Making",
-    "Sustainable Growth",
-    "Improved Customer Engagement",
-  ];
-
-  // Use first active solution or fallback to default
-  const solution = solutions.find((s) => s.isActive) || {
-    subtitle: "Driven by Smart Solutions",
-    title: "Innovating Business Solutions",
-    mainImage: mainImg,
-    smallImage: smallImg,
-    features: defaultFeatures,
-    benefits: defaultBenefits,
-  };
-
-  // Ensure features and benefits are arrays
-  const features = Array.isArray(solution.features)
-    ? solution.features
-    : defaultFeatures;
-  const benefits = Array.isArray(solution.benefits)
-    ? solution.benefits
-    : defaultBenefits;
+  const solution = solutions.find((s) => s.isActive);
 
   if (loading) {
     return (
@@ -66,6 +30,29 @@ export default function BusinessSolutions() {
         </div>
       </section>
     );
+  }
+
+  // Don't render if no data
+  if (!solution) {
+    return null;
+  }
+
+  // Parse features and benefits
+  const parseArray = (data) => {
+    try {
+      const parsed = typeof data === "string" ? JSON.parse(data) : data;
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.error("Error parsing array:", error);
+      return [];
+    }
+  };
+
+  const features = parseArray(solution.features);
+  const benefits = parseArray(solution.benefits);
+
+  if (features.length === 0 || benefits.length === 0) {
+    return null;
   }
 
   return (

@@ -1,88 +1,61 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+// eslint-disable-next-line no-unused-vars
+import { AnimatePresence, motion } from "framer-motion";
 import { useAPI } from "../../hooks/useAPI";
 import "./Hero.css";
-import { motion } from "framer-motion";
-import carousel1 from "@/assets/images/home/carousel1.jpg";
-import carousel2 from "@/assets/images/home/carousel2.jpg";
-import carousel3 from "@/assets/images/home/carousel3.jpg";
 
 export default function Hero() {
   const { data: heroData, loading } = useAPI("hero-sections");
   const [currentImage, setCurrentImage] = useState(0);
   const [currentQuote, setCurrentQuote] = useState(0);
 
-  // Use first active hero section or fallback to default
-  const hero = heroData.find((h) => h.isActive) || {
-    images: [carousel1, carousel2, carousel3],
-    quotes: [
-      {
-        title: "Beyond Software — We Build Experiences",
-        subtitle: "Crafting meaningful digital journeys for users everywhere.",
-      },
-      {
-        title: "WisdomQuantum is",
-        subtitle:
-          "A software & IT solutions company crafting web, app, and digital services for the modern world.",
-      },
-      {
-        title: "Building the Future of Digital Innovation",
-        subtitle:
-          "Delivering smart, scalable, and impactful technology solutions.",
-      },
-    ],
-    ctaText: "Explore Services",
-    ctaLink: "/services",
-  };
+  // Use first active hero section
+  const hero = heroData.find((h) => h.isActive);
 
-  // Process images - add backend URL if needed
+  // Parse and process images
   const processImages = (imgs) => {
-    // Check if imgs is valid array
-    if (!imgs || !Array.isArray(imgs) || imgs.length === 0) {
-      return [carousel1, carousel2, carousel3];
-    }
-    return imgs.map((img) => {
-      if (typeof img === "string") {
-        return img.startsWith("http") || img.startsWith("/assets")
-          ? img
-          : `${import.meta.env.VITE_BACKEND_URL}${img}`;
+    try {
+      // If imgs is a string, parse it
+      const parsedImgs = typeof imgs === "string" ? JSON.parse(imgs) : imgs;
+
+      if (
+        !parsedImgs ||
+        !Array.isArray(parsedImgs) ||
+        parsedImgs.length === 0
+      ) {
+        return [];
       }
-      return img;
-    });
+
+      return parsedImgs.map((img) => {
+        if (typeof img === "string") {
+          return img.startsWith("http") || img.startsWith("/assets")
+            ? img
+            : `${import.meta.env.VITE_BACKEND_URL}${img}`;
+        }
+        return img;
+      });
+    } catch (error) {
+      console.error("Error parsing images:", error);
+      return [];
+    }
   };
 
-  const images = processImages(hero.images);
+  // Parse quotes
+  const parseQuotes = (quotesData) => {
+    try {
+      // If quotesData is a string, parse it
+      const parsedQuotes =
+        typeof quotesData === "string" ? JSON.parse(quotesData) : quotesData;
+      return Array.isArray(parsedQuotes) ? parsedQuotes : [];
+    } catch (error) {
+      console.error("Error parsing quotes:", error);
+      return [];
+    }
+  };
 
-  // Process quotes with fallback
-  const defaultQuotes = [
-    {
-      title: "Beyond Software — We Build Experiences",
-      subtitle: "Crafting meaningful digital journeys for users everywhere.",
-    },
-    {
-      title: "WisdomQuantum is",
-      subtitle:
-        "A software & IT solutions company crafting web, app, and digital services for the modern world.",
-    },
-    {
-      title: "Building the Future of Digital Innovation",
-      subtitle:
-        "Delivering smart, scalable, and impactful technology solutions.",
-    },
-  ];
-
-  const quotes =
-    Array.isArray(hero.quotes) && hero.quotes.length > 0
-      ? hero.quotes
-      : defaultQuotes;
-
-  // Debug
-  console.log("Hero Data:", hero);
-  console.log("Hero Images Raw:", hero.images);
-  console.log("Hero Quotes Raw:", hero.quotes);
-  console.log("Processed Images:", images);
-  console.log("Processed Quotes:", quotes);
+  const images = hero ? processImages(hero.images) : [];
+  const quotes = hero ? parseQuotes(hero.quotes) : [];
 
   useEffect(() => {
     if (images.length > 0) {
@@ -114,24 +87,22 @@ export default function Hero() {
     );
   }
 
+  // Don't render if no hero data
+  if (!hero || images.length === 0 || quotes.length === 0) {
+    return null;
+  }
+
   return (
     <section className="hero-root">
       {/* Background Carousel */}
       <div className="hero-bg-container">
         <AnimatePresence mode="wait">
-          <motion.img
-            key={currentImage}
+          <img
             src={images[currentImage]}
             alt={`Hero Slide ${currentImage + 1}`}
             className="hero-bg-image"
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-            onError={(e) => {
+            onError={() => {
               console.log("Background image load error:", images[currentImage]);
-              e.target.onerror = null;
-              e.target.src = carousel1;
             }}
           />
         </AnimatePresence>
@@ -181,10 +152,8 @@ export default function Hero() {
             src={images[currentImage]}
             alt="Hero Visual"
             className="hero-image"
-            onError={(e) => {
+            onError={() => {
               console.log("Hero image load error:", images[currentImage]);
-              e.target.onerror = null;
-              e.target.src = carousel1;
             }}
           />
         </motion.div>

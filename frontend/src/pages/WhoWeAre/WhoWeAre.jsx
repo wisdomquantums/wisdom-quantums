@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import React from "react";
 import {
   Twitter,
   Linkedin,
@@ -8,15 +8,25 @@ import {
   Target,
   Award,
 } from "lucide-react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 import SEO from "@/components/SEO/SEO";
 import "./WhoWeAre.css";
 import { useAPI } from "../../hooks/useAPI";
-import whoweare from "../../assets/images/pages/whoweare.jpg";
 
 export default function WhoWeAre() {
   const { data: teamMembers, loading: teamLoading } = useAPI("team");
   const { data: aboutData } = useAPI("about-page");
   const { data: founders, loading: foundersLoading } = useAPI("founders");
+  const [flippedCards, setFlippedCards] = React.useState({});
+
+  // Toggle flip state for a specific card
+  const handleCardClick = (memberId) => {
+    setFlippedCards((prev) => ({
+      ...prev,
+      [memberId]: !prev[memberId],
+    }));
+  };
 
   // Filter active team members and parse social data
   const team = teamMembers
@@ -42,11 +52,10 @@ export default function WhoWeAre() {
 
   // Get active about page content
   const about = aboutData.find((item) => item.isActive) || {
-    bannerImage: whoweare,
-    introTitle:
-      "WisdomQuantums: Innovating the Future with Next-Generation Technologies",
-    introText:
-      "WisdomQuantums, a leading IT company, is redefining the digital landscape with innovative next-gen technologies. Our skilled team of professionals delivers high-quality, scalable, and customized IT solutions for global clients. Partner with us to experience excellence in IT services that drive meaningful growth and sustainable success.",
+    bannerImage: "",
+    introTitle: "",
+    introText: "",
+    stats: null,
   };
 
   // Get active founders
@@ -97,60 +106,72 @@ export default function WhoWeAre() {
             Creating and working together for improvement
           </p>
 
-          {/* Stats */}
-          <motion.div
-            className="wq-stats"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <div className="stat-item">
-              <Users className="stat-icon" />
-              <div className="stat-value">50+</div>
-              <div className="stat-label">Team Members</div>
-            </div>
-            <div className="stat-item">
-              <Target className="stat-icon" />
-              <div className="stat-value">100+</div>
-              <div className="stat-label">Projects</div>
-            </div>
-            <div className="stat-item">
-              <Award className="stat-icon" />
-              <div className="stat-value">5+</div>
-              <div className="stat-label">Years Experience</div>
-            </div>
-          </motion.div>
+          {/* Stats - Dynamic from backend */}
+          {about.stats && (
+            <motion.div
+              className="wq-stats"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              {about.stats.teamMembers && (
+                <div className="stat-item">
+                  <Users className="stat-icon" />
+                  <div className="stat-value">{about.stats.teamMembers}</div>
+                  <div className="stat-label">Team Members</div>
+                </div>
+              )}
+              {about.stats.projects && (
+                <div className="stat-item">
+                  <Target className="stat-icon" />
+                  <div className="stat-value">{about.stats.projects}</div>
+                  <div className="stat-label">Projects</div>
+                </div>
+              )}
+              {about.stats.experience && (
+                <div className="stat-item">
+                  <Award className="stat-icon" />
+                  <div className="stat-value">{about.stats.experience}</div>
+                  <div className="stat-label">Years Experience</div>
+                </div>
+              )}
+            </motion.div>
+          )}
         </motion.div>
 
         {/* BANNER IMAGE */}
-        <motion.div
-          className="wq-banner"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="banner-wrapper">
-            <img
-              src={about.bannerImage}
-              className="wq-banner-img"
-              alt="Team Collaboration"
-            />
-            <div className="banner-overlay"></div>
-          </div>
-        </motion.div>
+        {about.bannerImage && (
+          <motion.div
+            className="wq-banner"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="banner-wrapper">
+              <img
+                src={about.bannerImage}
+                className="wq-banner-img"
+                alt="Team Collaboration"
+              />
+              <div className="banner-overlay"></div>
+            </div>
+          </motion.div>
+        )}
 
         {/* INTRO */}
-        <motion.section
-          className="wq-intro"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="wq-intro-title">{about.introTitle}</h2>
-          <p className="wq-intro-text">{about.introText}</p>
-        </motion.section>
+        {about.introTitle && about.introText && (
+          <motion.section
+            className="wq-intro"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="wq-intro-title">{about.introTitle}</h2>
+            <p className="wq-intro-text">{about.introText}</p>
+          </motion.section>
+        )}
 
         {/* FOUNDERS SECTION */}
         {foundersLoading ? (
@@ -186,7 +207,9 @@ export default function WhoWeAre() {
                 <div className="founder-content">
                   <div className="founder-badge">{founder.role}</div>
                   <h2 className="founder-name">{founder.name}</h2>
-                  <p className="founder-desc">{founder.description}</p>
+                  <p className="founder-desc text-justify">
+                    {founder.description}
+                  </p>
 
                   <div className="founder-social">
                     {founder.social?.twitter && (
@@ -281,40 +304,30 @@ export default function WhoWeAre() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                whileHover={{ y: -8 }}
+                onClick={() => handleCardClick(member.id || index)}
               >
-                <div className="team-card-inner">
+                <div
+                  className={`team-card-inner ${
+                    flippedCards[member.id || index] ? "flipped" : ""
+                  }`}
+                >
                   {/* Front */}
                   <div className="team-card-front">
                     <div className="team-avatar-wrapper">
                       <div className="team-avatar-bg"></div>
-                      <img
-                        src={
-                          member.image
-                            ? member.image.startsWith("http")
+                      {member.image && (
+                        <img
+                          src={
+                            member.image.startsWith("http")
                               ? member.image
                               : `${import.meta.env.VITE_BACKEND_URL}${
                                   member.image
                                 }`
-                            : `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                                member.name
-                              )}&background=2563eb&color=fff&size=200`
-                        }
-                        className="team-avatar"
-                        alt={member.name}
-                        onError={(e) => {
-                          console.log(
-                            "Image load error for:",
-                            member.name,
-                            "Image path:",
-                            member.image
-                          );
-                          e.target.onerror = null;
-                          e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                            member.name
-                          )}&background=2563eb&color=fff&size=200`;
-                        }}
-                      />
+                          }
+                          className="team-avatar"
+                          alt={member.name}
+                        />
+                      )}
                     </div>
                     <div className="team-info">
                       <h3 className="team-name">{member.name}</h3>
@@ -337,59 +350,55 @@ export default function WhoWeAre() {
                           <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
                         </svg>
                       </div>
-                      <p className="team-bio">
-                        {member.bio ||
-                          `Passionate ${member.position} dedicated to delivering excellence and innovation at WisdomQuantums.`}
-                      </p>
-                      <div className="team-back-divider"></div>
-                      <div className="team-social">
-                        {member.social?.linkedin && (
-                          <motion.a
-                            href={member.social.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="team-social-link"
-                            whileHover={{ scale: 1.15, y: -3 }}
-                            whileTap={{ scale: 0.95 }}
-                            title="Connect on LinkedIn"
-                          >
-                            <Linkedin className="w-5 h-5" />
-                          </motion.a>
-                        )}
-                        {member.social?.twitter && (
-                          <motion.a
-                            href={member.social.twitter}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="team-social-link"
-                            whileHover={{ scale: 1.15, y: -3 }}
-                            whileTap={{ scale: 0.95 }}
-                            title="Follow on Twitter"
-                          >
-                            <Twitter className="w-5 h-5" />
-                          </motion.a>
-                        )}
-                        {member.social?.github && (
-                          <motion.a
-                            href={member.social.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="team-social-link"
-                            whileHover={{ scale: 1.15, y: -3 }}
-                            whileTap={{ scale: 0.95 }}
-                            title="View GitHub"
-                          >
-                            <Instagram className="w-5 h-5" />
-                          </motion.a>
-                        )}
-                      </div>
-                      {!member.social?.linkedin &&
-                        !member.social?.twitter &&
-                        !member.social?.github && (
-                          <p className="team-connect-text">
-                            Connect with {member.name.split(" ")[0]}
-                          </p>
-                        )}
+                      {member.bio && <p className="team-bio">{member.bio}</p>}
+                      {(member.social?.linkedin ||
+                        member.social?.twitter ||
+                        member.social?.github) && (
+                        <>
+                          <div className="team-back-divider"></div>
+                          <div className="team-social">
+                            {member.social?.linkedin && (
+                              <motion.a
+                                href={member.social.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="team-social-link"
+                                whileHover={{ scale: 1.15, y: -3 }}
+                                whileTap={{ scale: 0.95 }}
+                                title="Connect on LinkedIn"
+                              >
+                                <Linkedin className="w-5 h-5" />
+                              </motion.a>
+                            )}
+                            {member.social?.twitter && (
+                              <motion.a
+                                href={member.social.twitter}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="team-social-link"
+                                whileHover={{ scale: 1.15, y: -3 }}
+                                whileTap={{ scale: 0.95 }}
+                                title="Follow on Twitter"
+                              >
+                                <Twitter className="w-5 h-5" />
+                              </motion.a>
+                            )}
+                            {member.social?.github && (
+                              <motion.a
+                                href={member.social.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="team-social-link"
+                                whileHover={{ scale: 1.15, y: -3 }}
+                                whileTap={{ scale: 0.95 }}
+                                title="View GitHub"
+                              >
+                                <Instagram className="w-5 h-5" />
+                              </motion.a>
+                            )}
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback, useState } from "react";
-import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, Loader2 } from "lucide-react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 import SEO from "@/components/SEO/SEO";
 import { useAPI } from "../../hooks/useAPI";
 import "./ITSolutions.css";
@@ -13,9 +14,9 @@ export default function ITSolutions() {
 
   // Debug logging
   useEffect(() => {
-    console.log("🔍 IT Solutions Data:", itSolutions);
-    console.log("⏳ Loading:", loading);
-    console.log("❌ Error:", error);
+    console.log("IT Solutions Data:", itSolutions);
+    console.log("Loading:", loading);
+    console.log("Error:", error);
   }, [itSolutions, loading, error]);
 
   // Filter active solutions and sort by order
@@ -217,9 +218,9 @@ export default function ITSolutions() {
 
                       <div className="its-card-content">
                         <div className="its-card-text">
-                          <h3 className="its-card-title">{item.title}</h3>
+                          <h3 className="its-card-titl">{item.title}</h3>
                           {item.description && (
-                            <p className="its-card-desc">
+                            <p className="its-card-dec">
                               {item.description.length > 100
                                 ? `${item.description.substring(0, 100)}...`
                                 : item.description}

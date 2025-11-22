@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Link } from "react-router-dom";
 import "./CTASection.css";
 
@@ -23,7 +21,7 @@ export default function CTASection() {
             Let’s bring your ideas to life ! Get in touch with us for tailored
             solutions and expert guidance to kickstart your project.{" "}
           </p>{" "}
-          <Link to="/contact" className="cta-btn">
+          <Link to="/contact-us" className="cta-btn">
             {" "}
             Contact Us{" "}
           </Link>{" "}

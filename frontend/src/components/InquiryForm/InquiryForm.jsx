@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { X } from "lucide-react";
 import "./InquiryForm.css";
 
 export default function InquiryForm() {
+  const location = useLocation();
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
@@ -16,11 +18,17 @@ export default function InquiryForm() {
     message: "",
   });
 
-  // Show popup after 3 seconds on home page load
+  // Auto-open form only on home page after 3 seconds
   useEffect(() => {
-    const timer = setTimeout(() => setShowForm(true), 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    // Check if current page is home page
+    const isHomePage =
+      location.pathname === "/" || location.pathname === "/home";
+
+    if (isHomePage) {
+      const timer = setTimeout(() => setShowForm(true), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [location.pathname]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

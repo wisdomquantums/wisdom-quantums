@@ -64,11 +64,25 @@ export default function HowWeWork() {
 
   const handleEdit = (item) => {
     setEditingItem(item);
+
+    // Parse steps if it's a string
+    const parseSteps = (stepsData) => {
+      try {
+        if (typeof stepsData === "string") {
+          return JSON.parse(stepsData);
+        }
+        return Array.isArray(stepsData) ? stepsData : [];
+      } catch (error) {
+        console.error("Error parsing steps:", error);
+        return [];
+      }
+    };
+
     setFormData({
       title: item.title,
       subtitle: item.subtitle,
       centerLogo: item.centerLogo,
-      steps: item.steps || [],
+      steps: parseSteps(item.steps),
       isActive: item.isActive,
     });
     setIsModalOpen(true);

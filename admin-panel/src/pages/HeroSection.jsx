@@ -77,13 +77,45 @@ export default function HeroSection() {
 
   const handleEdit = (item) => {
     setEditingItem(item);
+
+    // Parse images and quotes if they are strings
+    const parseImages = (imgs) => {
+      try {
+        if (typeof imgs === "string") {
+          return JSON.parse(imgs);
+        }
+        return Array.isArray(imgs) ? imgs : ["", "", ""];
+      } catch (error) {
+        console.error("Error parsing images:", error);
+        return ["", "", ""];
+      }
+    };
+
+    const parseQuotes = (quotes) => {
+      try {
+        if (typeof quotes === "string") {
+          return JSON.parse(quotes);
+        }
+        return Array.isArray(quotes)
+          ? quotes
+          : [
+              { title: "", subtitle: "" },
+              { title: "", subtitle: "" },
+              { title: "", subtitle: "" },
+            ];
+      } catch (error) {
+        console.error("Error parsing quotes:", error);
+        return [
+          { title: "", subtitle: "" },
+          { title: "", subtitle: "" },
+          { title: "", subtitle: "" },
+        ];
+      }
+    };
+
     setFormData({
-      images: item.images || ["", "", ""],
-      quotes: item.quotes || [
-        { title: "", subtitle: "" },
-        { title: "", subtitle: "" },
-        { title: "", subtitle: "" },
-      ],
+      images: parseImages(item.images),
+      quotes: parseQuotes(item.quotes),
       ctaText: item.ctaText || "Explore Services",
       ctaLink: item.ctaLink || "/it-solutions",
       isActive: item.isActive,

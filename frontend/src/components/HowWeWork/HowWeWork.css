@@ -333,7 +333,6 @@
     position: absolute;
     inset: -5px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--primary-color));
     opacity: 0.3;
     filter: blur(15px);
     animation: rotate 8s linear infinite;

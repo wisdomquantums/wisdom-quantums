@@ -63,10 +63,24 @@ export default function BusinessDevelopment() {
 
   const handleEdit = (item) => {
     setEditingItem(item);
+
+    // Parse cards if it's a string
+    const parseCards = (cardsData) => {
+      try {
+        if (typeof cardsData === "string") {
+          return JSON.parse(cardsData);
+        }
+        return Array.isArray(cardsData) ? cardsData : [];
+      } catch (error) {
+        console.error("Error parsing cards:", error);
+        return [];
+      }
+    };
+
     setFormData({
       tagline: item.tagline,
       title: item.title,
-      cards: item.cards || [],
+      cards: parseCards(item.cards),
       isActive: item.isActive,
     });
     setIsModalOpen(true);

@@ -1,7 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO/SEO";
-import InquiryForm from "@/components/InquiryForm/InquiryForm";
 import Hero from "../../components/Hero/Hero";
 import Testimonials from "../../components/Testimonials/Testimonials";
 import Blog from "../Blog/Blog";
@@ -158,9 +156,6 @@ export default function Home() {
         >
           <Testimonials />
         </motion.section>
-
-        {/* INQUIRY FORM - Sticky button + Popup */}
-        <InquiryForm />
       </div>
     </>
   );

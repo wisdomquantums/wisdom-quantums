@@ -15,34 +15,7 @@ const iconMap = {
 export default function BusinessDevelopment() {
   const { data: businessDevData, loading } = useAPI("business-development");
 
-  // Default cards
-  const defaultCards = [
-    {
-      title: "Strategic Growth Acceleration",
-      text: "Focused strategies that simplify processes and strengthen business growth.",
-      icon: "BarChart3",
-    },
-    {
-      title: "Intelligent Tech Integration",
-      text: "Smart tools and automation that increase efficiency and accuracy.",
-      icon: "Cpu",
-    },
-    {
-      title: "Future-Ready Innovation",
-      text: "Modern ideas and automation to keep your business ahead.",
-      icon: "Bot",
-    },
-  ];
-
-  // Use first active item or fallback to default
-  const content = businessDevData.find((item) => item.isActive) || {
-    tagline: "We are Avers",
-    title: "Business Development & Innovation",
-    cards: defaultCards,
-  };
-
-  // Ensure cards is an array
-  const cards = Array.isArray(content.cards) ? content.cards : defaultCards;
+  const content = businessDevData.find((item) => item.isActive);
 
   if (loading) {
     return (
@@ -52,6 +25,29 @@ export default function BusinessDevelopment() {
         </div>
       </section>
     );
+  }
+
+  // Don't render if no data
+  if (!content) {
+    return null;
+  }
+
+  // Parse cards
+  const parseCards = (cardsData) => {
+    try {
+      const parsed =
+        typeof cardsData === "string" ? JSON.parse(cardsData) : cardsData;
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.error("Error parsing cards:", error);
+      return [];
+    }
+  };
+
+  const cards = parseCards(content.cards);
+
+  if (cards.length === 0) {
+    return null;
   }
 
   return (
